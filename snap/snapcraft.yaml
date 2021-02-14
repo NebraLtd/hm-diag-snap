@@ -9,7 +9,7 @@ description: |
   store.
 architectures:
   - build-on: ['amd64']
-    run-on: ['arm64']
+    run-on: ['amd64']
 grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
@@ -17,9 +17,23 @@ parts:
   hotspot-diagnostics:
     # See 'snapcraft plugins'
     source: https://github.com/NebraLtd/gateway-diagnostics.git
+    build-packages:
+      - python3-wheel
+    python-packages:
+      - pip
+      - setuptools
+      - wheel
     stage-packages:
+      - python3-wheel
       - python3-qrcode
       - python3-dbus
       - usbutils
       - i2c-tools
     plugin: python
+
+apps:
+  hotspot-diagnostics:
+    environment:
+      LC_ALL: C.UTF-8
+      LANG: C.UTF-8
+    command: bin/nebraHotspotDiagnostics
