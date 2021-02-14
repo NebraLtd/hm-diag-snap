@@ -14,25 +14,12 @@ grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
 parts:
-  miner:
+  hotspot-diagnostics:
     # See 'snapcraft plugins'
-    source: https://github.com/helium/miner.git
-    build-packages:
-      - libdbus-1-dev
-      - autoconf
-      - automake
-      - libtool
-      - flex
-      - libgmp-dev
-      - cmake
-      - libsodium-dev
-      - libssl-dev
-      - bison
-      - libsnappy-dev
-      - libclang-dev
-      - doxygen
-      - make
-      - erlang
-      - cargo
-
-    plugin: make
+    source: https://github.com/NebraLtd/gateway-diagnostics.git
+    stage-packages:
+      - python3-qrcode
+      - python3-dbus
+      - usbutils
+      - i2c-tools
+    plugin: python
